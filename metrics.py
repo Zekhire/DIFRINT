@@ -154,8 +154,12 @@ def metrics(original_dir, pred_dir):
 	print(str.format('{0:.4f}', np.absolute(np.min(DV_seq))) )
 	print('***Stability Score (Avg, Trans, Rot):')
 	print(str.format('{0:.4f}',  (SS_t+SS_r)/2) +' | '+ str.format('{0:.4f}', SS_t) +' | '+ str.format('{0:.4f}', SS_r) )
+	print(np.min(SS_t, SS_r))		# <- zekhire
 
 if __name__ == '__main__':
-	metrics(in_src='./data/Stab_te_reg/07/', out_src='./output/OurStabReg2/07/')
+	in_src = './data/Stab_te_reg/07/'
+	out_src = './output/OurStabReg2/07/'
+	# metrics(in_src='./data/Stab_te_reg/07/', out_src='./output/OurStabReg2/07/')
+	metrics(in_src=in_src, out_src=out_src)
 
 

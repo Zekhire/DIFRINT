@@ -1,0 +1,4 @@
+data/
+output/
+trained_models/
+pwc-net.pytorch/

@@ -5,11 +5,11 @@ from shutil import copyfile
 
 import torch
 import torch.nn as nn
-from torch.autograd import Variable
+# from torch.autograd import Variable
 from models.models import DIFNet, DIFNet2
-from models.pwcNet import PwcNet
-from metrics import metrics
-from frame2vid import frame2vid
+# from models.pwcNet import PwcNet
+# from metrics import metrics
+# from frame2vid import frame2vid
 
 from PIL import Image
 import numpy as np
@@ -82,7 +82,7 @@ for num_iter in range(opt.n_iter):
 			else:
 				skip = opt.skip
 			#end
-
+			# print(opt.out_file + f[:-9] + '%05d.png' % (int(f[-9:-4])-skip))
 			fr_g1 = torch.cuda.FloatTensor(np.array(Image.open(opt.out_file + f[:-9] + '%05d.png' % (int(f[-9:-4])-skip))).transpose(2, 0, 1).astype(np.float32)[None,:,:,:] / 255.0)
 			#fr_g2 = torch.cuda.FloatTensor(np.array(Image.open(src + f)).transpose(2, 0, 1).astype(np.float32)[None,:,:,:] / 255.0)
 			fr_g3 = torch.cuda.FloatTensor(np.array(Image.open(src + f[:-9] + '%05d.png' % (int(f[-9:-4])+skip))).transpose(2, 0, 1).astype(np.float32)[None,:,:,:] / 255.0)
@@ -95,8 +95,9 @@ for num_iter in range(opt.n_iter):
 				fhat, I_int = DIFNet(fr_g1, fr_g3, fr_o2, fr_g3, fr_g1, 0.5) # Notice 0.5
 
 			# Save image
-			#img = Image.fromarray(np.uint8(fhat.cpu().squeeze().permute(1,2,0)*255))
-			#img.save(opt.out_file + f)
+			img = Image.fromarray(np.uint8(fhat.cpu().squeeze().permute(1,2,0)*255))
+			img.save(opt.out_file + f)
+			# img.save("output/OurStabReg2/07_my/" + f)
 
 			sys.stdout.write('\rFrame: ' + str(idx) + '/' + str(len(frameList)-2))
 			sys.stdout.flush()

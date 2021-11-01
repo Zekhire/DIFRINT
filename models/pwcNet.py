@@ -13,11 +13,11 @@ import matplotlib.pyplot as plt
 import models.flowlib
 import pdb
 
-try:
-	from models.correlation import correlation # the custom cost volume layer
-except:
-	sys.path.insert(0, './correlation'); import correlation # you should consider upgrading python
-# end
+# try:
+from models.correlation import correlation # the custom cost volume layer
+# except:
+# 	sys.path.insert(0, './correlation'); import correlation # you should consider upgrading python
+# # end
 
 ##########################################################
 

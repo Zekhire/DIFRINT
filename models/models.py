@@ -4,7 +4,7 @@ import torch.nn.functional as F
 import torch.nn.init as init
 
 from models.pwcNet import PwcNet
-from models.gridNet import IncepGridNet
+# from models.gridNet import IncepGridNet
 
 import math
 import pdb
@@ -340,7 +340,8 @@ class DIFNet2(nn.Module):
 
 		# PWC
 		self.pwc = PwcNet()
-		self.pwc.load_state_dict(torch.load('./trained_models/sintel.pytorch'))
+		# self.pwc.load_state_dict(torch.load('./trained_models/sintel.pytorch'))
+		self.pwc.load_state_dict(torch.load('./pwc-net.pytorch/models/sintel.pytorch'))
 		self.pwc.eval()
 
 		# Warping layer
